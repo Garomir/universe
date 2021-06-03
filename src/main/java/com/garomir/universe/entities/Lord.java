@@ -19,7 +19,7 @@ public class Lord implements Comparable{
 
     @OneToMany(
             mappedBy = "lord",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.DETACH,
             fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Planet> planets;

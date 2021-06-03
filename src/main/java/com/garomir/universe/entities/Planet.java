@@ -15,7 +15,7 @@ public class Planet {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "lord_id", nullable = true)
+    @JoinColumn(name = "lord_id")
     @JsonIgnore
     private Lord lord;
 

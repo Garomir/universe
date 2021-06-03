@@ -4,14 +4,18 @@ import com.garomir.universe.entities.Lord;
 import com.garomir.universe.entities.Planet;
 import com.garomir.universe.repos.PlanetRepo;
 import com.garomir.universe.services.PlanetService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
+@Service
 public class PlanetServiceImpl implements PlanetService {
 
     private PlanetRepo planetRepo;
 
+    @Autowired
     public PlanetServiceImpl(PlanetRepo planetRepo) {
         this.planetRepo = planetRepo;
     }
