@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "lords")
-public class Lord {
+public class Lord implements Comparable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -57,5 +57,22 @@ public class Lord {
 
     public void setPlanets(Set<Planet> planets) {
         this.planets = planets;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Lord tmp = (Lord) o;
+        if(this.age < tmp.age)
+        {
+            /* текущее меньше полученного */
+            return -1;
+        }
+        else if(this.age > tmp.age)
+        {
+            /* текущее больше полученного */
+            return 1;
+        }
+        /* текущее равно полученному */
+        return 0;
     }
 }
