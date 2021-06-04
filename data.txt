@@ -1,0 +1,6 @@
+INSERT INTO LORDS VALUES
+(1, 'Jon', 500),(2, 'Jack', 505),(3, 'Jess', 305),(4, 'Joy', 9),(5, 'Jim', 1000),(6, 'Ram', 38),
+(7, 'Roy', 999),(8, 'Rich', 113),(9, 'Rick', 1),(10, 'Sam', 341),(11, 'fga', 57),(12, 'fff', 2200);
+
+INSERT INTO PLANETS VALUES
+(1, 'Mars', 1),(2, 'Venus', 6),(3, 'Mercury', 10),(4, 'Venera', null),(5, 'Uran', null),(6, 'Jupiter', 12);

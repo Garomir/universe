@@ -52,8 +52,8 @@ public class MyRestController {
         planetService.deletePlanet(id);
     }
 
-    @PutMapping("/planet/{id}")
-    public void updatePlanet(@PathVariable("id") int id, @RequestBody Lord lord){
-        planetService.setLordForPlanet(id, lord);
+    @PutMapping("/planet/{id}/{lordId}")
+    public void setLordForPlanet(@PathVariable("id") int id, @PathVariable("lordId") int lordId){
+        planetService.setLordForPlanet(id, lordId);
     }
 }

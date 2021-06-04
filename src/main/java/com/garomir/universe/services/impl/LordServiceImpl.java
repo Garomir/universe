@@ -28,7 +28,7 @@ public class LordServiceImpl implements LordService {
     @Override
     public List<Lord> getFreeLords() {
         List<Lord> lords = lordRepo.findAll();
-        List<Lord> freeLords = lordRepo.findAll();
+        List<Lord> freeLords = new ArrayList<>();
         for (Lord l: lords) {
             if (l.getPlanets().size() < 1){
                 freeLords.add(l);
@@ -39,15 +39,9 @@ public class LordServiceImpl implements LordService {
 
     @Override
     public List<Lord> getTop10Lords() {
-        List<Lord> lords = lordRepo.findAll().stream()
+        return lordRepo.findAll().stream()
                 .sorted(Lord::compareTo)
+                .limit(10)
                 .collect(Collectors.toList());
-        List<Lord> top10Lords = new ArrayList<>();
-        for (int i = 1; i <= 10; i++){
-            top10Lords.add(lords.get(i));
-        }
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //Если в базе нет повелителей, то IndexOutOfBoundsException
-        return top10Lords;
     }
 }
