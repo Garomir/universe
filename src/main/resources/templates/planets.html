@@ -23,14 +23,20 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Lord ID</th>
+                    <th>Details</th>
+                    <th>Lord</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="planet : ${planets}">
                     <td th:text="${planet.id}"/>
                     <td th:text="${planet.name}"/>
-                    <td th:text="${planet.lord}"/>
+                    <td>
+                        <form th:action="@{'/planetdetails/' + ${planet.id}}" method="get">
+                            <button type="submit">Подробности</button>
+                        </form>
+                    </td>
+                    <td th:text="${planet.lord.name}" th:if="${planet.lord ne null}"/>
                 </tr>
             </tbody>
         </table>

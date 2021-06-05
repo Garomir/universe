@@ -6,8 +6,10 @@ import com.garomir.universe.services.LordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,5 +50,11 @@ public class LordServiceImpl implements LordService {
     @Override
     public List<Lord> getAllLords() {
         return lordRepo.findAll();
+    }
+
+    @Override
+    public boolean isLordExists(int id) {
+        Optional<Lord> lord = lordRepo.findById(id);
+        return lord.isPresent();
     }
 }

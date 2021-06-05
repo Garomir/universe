@@ -18,6 +18,7 @@ public class MyController {
 
     private LordService lordService;
     private PlanetService planetService;
+    Planet megaPlanet;
 
     @Autowired
     public MyController(LordService lordService, PlanetService planetService) {
@@ -45,8 +46,10 @@ public class MyController {
         List<Planet> planets = new ArrayList<>();
         planets = planetService.getAllPlanets();
         Planet planet = new Planet();
+        Planet planet2 = new Planet();
         model.addAttribute("planets", planets);
         model.addAttribute("planet", planet);
+        model.addAttribute("planet2", planet2);
         return "planets";
     }
 
@@ -80,5 +83,18 @@ public class MyController {
     public String addPlanet(@ModelAttribute(value = "planet") Planet planet){
         planetService.addPlanet(planet);
         return "redirect:/planets";
+    }
+
+    @PostMapping("/setlordforplanet")
+    public String setLordForPlanet(int lordid){
+        planetService.setLordForPlanet(megaPlanet.getId(), lordid);
+        return "redirect:/planets";
+    }
+
+    @GetMapping("/planetdetails/{planetId}")
+    public String viewPlanetDetails(Model model, @PathVariable("planetId") int planetId){
+        megaPlanet = planetService.findPlanetById(planetId);
+        model.addAttribute("planet", megaPlanet);
+        return "planet-details";
     }
 }
