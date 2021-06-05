@@ -13,7 +13,7 @@
     <div th:object="${planet}">
         <span th:text="${planet.id}"></span>
         <span th:text="${planet.name}"></span>
-        <span th:text="${planet.lord.name}"></span>
+        <span th:text="${planet.lord.name}" th:if="${planet.lord ne null}"></span>
     </div>
     <form th:action="@{/setlordforplanet}" method="post">
         <input name="lordid" placeholder="Lord ID"/>

@@ -87,7 +87,9 @@ public class MyController {
 
     @PostMapping("/setlordforplanet")
     public String setLordForPlanet(int lordid){
-        planetService.setLordForPlanet(megaPlanet.getId(), lordid);
+        if (lordService.isLordExists(lordid)){
+            planetService.setLordForPlanet(megaPlanet.getId(), lordid);
+        }
         return "redirect:/planets";
     }
 
