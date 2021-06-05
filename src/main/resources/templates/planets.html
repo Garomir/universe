@@ -11,12 +11,19 @@
 </head>
 <body>
     <div>
+        <form th:action="@{/addplanet}" th:object="${planet}" method="post">
+            <span>Name</span>
+            <input name="name"/>
+            <span>Lord ID</span>
+            <input name="lord"/>
+            <button type="submit">Создать планету</button>
+        </form>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Lord</th>
+                    <th>Lord ID</th>
                 </tr>
             </thead>
             <tbody>

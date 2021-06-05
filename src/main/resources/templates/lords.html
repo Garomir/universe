@@ -11,6 +11,19 @@
 </head>
 <body>
     <div>
+        <form th:action="@{/addlord}" th:object="${lord}" method="post">
+            <span>Name</span>
+            <input name="name"/>
+            <span>Age</span>
+            <input name="Age"/>
+            <button type="submit">Создать повелителя</button>
+        </form>
+        <form th:action="@{/getfreelords}" method="get">
+            <button type="submit">Получаем свободных повелителей</button>
+        </form>
+        <form th:action="@{/gettop10lords}" method="get">
+            <button type="submit">10 самых молодых повелителей</button>
+        </form>
         <table>
             <thead>
                 <tr>

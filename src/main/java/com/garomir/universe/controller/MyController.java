@@ -7,8 +7,7 @@ import com.garomir.universe.services.PlanetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,9 @@ public class MyController {
     public String viewLords(Model model){
         List<Lord> lords = new ArrayList<>();
         lords = lordService.getAllLords();
+        Lord emptyLord = new Lord();
         model.addAttribute("lords", lords);
+        model.addAttribute("lord", emptyLord);
         return "lords";
     }
 
@@ -43,9 +44,41 @@ public class MyController {
     public String viewPlanets(Model model){
         List<Planet> planets = new ArrayList<>();
         planets = planetService.getAllPlanets();
+        Planet planet = new Planet();
         model.addAttribute("planets", planets);
+        model.addAttribute("planet", planet);
         return "planets";
     }
 
+    @PostMapping("/addlord")
+    public String addLord(@ModelAttribute(value = "lord") Lord lord){
+        lordService.addLord(lord);
+        return "redirect:/lords";
+    }
 
+    @GetMapping("/getfreelords")
+    public String getFreeLords(Model model) {
+        List<Lord> lords = new ArrayList<>();
+        lords = lordService.getFreeLords();
+        Lord emptyLord = new Lord();
+        model.addAttribute("lords", lords);
+        model.addAttribute("lord", emptyLord);
+        return "lords";
+    }
+
+    @GetMapping("/gettop10lords")
+    public String getTop10Lords(Model model) {
+        List<Lord> lords = new ArrayList<>();
+        lords = lordService.getTop10Lords();
+        Lord emptyLord = new Lord();
+        model.addAttribute("lords", lords);
+        model.addAttribute("lord", emptyLord);
+        return "lords";
+    }
+
+    @PostMapping("/addplanet")
+    public String addPlanet(@ModelAttribute(value = "planet") Planet planet){
+        planetService.addPlanet(planet);
+        return "redirect:/planets";
+    }
 }
