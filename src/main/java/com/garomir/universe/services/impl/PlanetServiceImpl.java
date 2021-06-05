@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,11 @@ public class PlanetServiceImpl implements PlanetService {
     @Override
     public Planet addPlanet(Planet planet) {
         return planetRepo.save(planet);
+    }
+
+    @Override
+    public List<Planet> getAllPlanets() {
+        return planetRepo.findAll();
     }
 
     @Override

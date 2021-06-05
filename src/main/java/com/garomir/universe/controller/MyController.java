@@ -1,6 +1,7 @@
 package com.garomir.universe.controller;
 
 import com.garomir.universe.entities.Lord;
+import com.garomir.universe.entities.Planet;
 import com.garomir.universe.services.LordService;
 import com.garomir.universe.services.PlanetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,14 @@ public class MyController {
         model.addAttribute("lords", lords);
         return "lords";
     }
+
+    @GetMapping("/planets")
+    public String viewPlanets(Model model){
+        List<Planet> planets = new ArrayList<>();
+        planets = planetService.getAllPlanets();
+        model.addAttribute("planets", planets);
+        return "planets";
+    }
+
 
 }
