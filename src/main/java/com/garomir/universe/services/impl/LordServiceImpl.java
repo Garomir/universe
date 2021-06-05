@@ -44,4 +44,9 @@ public class LordServiceImpl implements LordService {
                 .limit(10)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Lord> getAllLords() {
+        return lordRepo.findAll();
+    }
 }

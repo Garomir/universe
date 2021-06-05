@@ -8,4 +8,5 @@ public interface LordService {
     Lord addLord(Lord lord);
     List<Lord> getFreeLords();
     List<Lord> getTop10Lords();
+    List<Lord> getAllLords();
 }
