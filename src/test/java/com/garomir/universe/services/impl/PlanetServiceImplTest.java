@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static com.garomir.universe.prototype.PlanetPrototype.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +48,9 @@ class PlanetServiceImplTest {
 
     @Test
     void getAllPlanets() {
+        when(planetRepo.findAll()).thenReturn(takePlanets());
+        List<Planet> foundPlanets = planetService.getAllPlanets();
+        assertThat(foundPlanets.size()).isEqualTo(5);
     }
 
     @Test
