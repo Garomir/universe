@@ -1,44 +1,54 @@
 package com.garomir.universe.services.impl;
 
 import com.garomir.universe.entities.Planet;
+import com.garomir.universe.prototype.PlanetPrototype;
+import com.garomir.universe.repos.LordRepo;
 import com.garomir.universe.repos.PlanetRepo;
+import com.garomir.universe.services.PlanetService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.assertj.core.api.Assertions.*;
+import static com.garomir.universe.prototype.PlanetPrototype.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 class PlanetServiceImplTest {
 
-    @Autowired
-    private PlanetServiceImpl planetService;
-
-    @MockBean
     private PlanetRepo planetRepo;
+    private LordRepo lordRepo;
+    private PlanetService planetService;
+
+    @BeforeEach
+    void setUp(){
+        planetRepo = mock(PlanetRepo.class);
+        lordRepo = mock(LordRepo.class);
+        planetService = new PlanetServiceImpl(planetRepo, lordRepo);
+    }
 
     @Test
-    void testAddPlanet() {
-        Planet planet = new Planet();
-        planet.setId(1);
-        planet.setName("test");
+    void addPlanet() {
+        when(planetRepo.save(any())).thenReturn(takePlanet());
+        Planet createdPlanet = planetService.addPlanet(takePlanet());
+        assertThat(createdPlanet).isNotNull();
+        assertThat(createdPlanet.getName()).isEqualTo(takePlanet().getName());
+    }
 
-        Mockito.when(planetRepo.save(planet)).thenReturn(planet);
+    @Test
+    void findPlanetById() {
+        when(planetRepo.getById(eq(1))).thenReturn(takePlanet());
+        Planet foundPlanet = planetService.findPlanetById(1);
+        assertThat(foundPlanet).isNotNull();
+        assertThat(foundPlanet.getName()).isEqualTo("testName");
+    }
 
-        assertEquals(planet, planetService.addPlanet(planet));
+    @Test
+    void getAllPlanets() {
     }
 
     @Test
     void deletePlanet() {
-    }
-
-    @Test
-    void setLordForPlanet() {
-
     }
 }

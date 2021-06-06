@@ -24,6 +24,11 @@ public class PlanetServiceImpl implements PlanetService {
         this.lordRepo = lordRepo;
     }
 
+    /*@Autowired
+    public PlanetServiceImpl(PlanetRepo planetRepo) {
+        this.planetRepo = planetRepo;
+    }*/
+
     @Override
     public Planet addPlanet(Planet planet) {
         return planetRepo.save(planet);
@@ -31,11 +36,7 @@ public class PlanetServiceImpl implements PlanetService {
 
     @Override
     public Planet findPlanetById(int id) {
-        Optional<Planet> planet = planetRepo.findById(id);
-        if (!planet.isPresent()){
-            throw new EntityNotFoundException("Entity not found");
-        }
-        return planet.get();
+        return planetRepo.getById(id);
     }
 
     @Override
